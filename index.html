@@ -270,14 +270,12 @@
       bloques.push(encabezado.join('\n'));
     }
 
-    if (obtenerValor('nota')) {
-      bloques.push(
-`━━━━━━━━━━━━━━━━━━
-NOTA TECNICA
-━━━━━━━━━━━━━━━━━━
+if (obtenerValor('nota')) {
+  bloques.push(
+`*NOTA TECNICA*
 ${obtenerValor('nota')}`
-      );
-    }
+  );
+}
 
     const conexion = [];
     if (obtenerValor('usuario_onu')) conexion.push(`USUARIO ONU: ${obtenerValor('usuario_onu')}`);
@@ -289,15 +287,12 @@ ${obtenerValor('nota')}`
     if (obtenerValor('rt')) conexion.push(`RT: ${obtenerValor('rt')}`);
     if (obtenerValor('tv')) conexion.push(`TV CON SEÑAL: ${obtenerValor('tv')}`);
 
-    if (conexion.length) {
-      bloques.push(
-`━━━━━━━━━━━━━━━━━━
-DATOS DE CONEXIÓN
-━━━━━━━━━━━━━━━━━━
+if (conexion.length) {
+  bloques.push(
+`*DATOS DE CONEXIÓN*
 ${conexion.join('\n')}`
-      );
-    }
-
+  );
+}
     const identificacion = [];
     if (obtenerValor('mechas')) identificacion.push(`MECHAS: ${obtenerValor('mechas')}`);
     if (obtenerValor('vineta')) identificacion.push(`VIÑETA: ${obtenerValor('vineta')}`);
@@ -315,14 +310,12 @@ ${conexion.join('\n')}`
       identificacion.push(`SN CAJA REC: ${gruposDinamicos['SN CAJA REC'].join(', ')}`);
     }
 
-    if (identificacion.length) {
-      bloques.push(
-`━━━━━━━━━━━━━━━━━━
-IDENTIFICACIÓN / EQUIPOS
-━━━━━━━━━━━━━━━━━━
+if (identificacion.length) {
+  bloques.push(
+`*IDENTIFICACIÓN / EQUIPOS*
 ${identificacion.join('\n')}`
-      );
-    }
+  );
+}
 
     const materiales = [];
     if (obtenerValor('fibra')) materiales.push(`FIBRA: ${obtenerValor('fibra')}`);
@@ -339,16 +332,14 @@ ${identificacion.join('\n')}`
     if (obtenerValor('grapas')) materiales.push(`GRAPAS: ${obtenerValor('grapas')}`);
     if (obtenerValor('cinta')) materiales.push(`CINTA AISLANTE (SI/NO): ${obtenerValor('cinta')}`);
 
-    if (materiales.length) {
-      bloques.push(
-`━━━━━━━━━━━━━━━━━━
-MATERIALES UTILIZADOS
-━━━━━━━━━━━━━━━━━━
+if (materiales.length) {
+  bloques.push(
+`*MATERIALES UTILIZADOS*
 ${materiales.join('\n')}`
-      );
-    }
+  );
+}
 
-    return bloques.join('\n\n');
+    return bloques.join('\n');
   }
 
   function actualizarVistaPrevia() {
