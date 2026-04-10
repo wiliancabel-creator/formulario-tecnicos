@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formato técnico rápido</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="card">
+      <div class="header">
+        <h1>Formato técnico rápido</h1>
+        <p>Llena solo lo necesario. Al copiar, solo saldrán los campos con información.</p>
+      </div>
+
+      <form id="formTecnico" class="form" onsubmit="return false;">
+        <div class="grid">
+          <div class="field full">
+            <label for="tecnicos">TÉCNICOS (EMPRESA)</label>
+            <input id="tecnicos" type="text" data-label="TÉCNICOS (EMPRESA)" placeholder="Técnico líder / Técnico auxiliar">
+          </div>
+
+          <div class="field">
+            <label for="codigo">CODIGO/#TAREA</label>
+            <input id="codigo" type="text" data-label="CODIGO/#TAREA">
+          </div>
+
+          <div class="field full">
+            <label for="nota">NOTA TECNICA</label>
+            <textarea id="nota" rows="3" data-label="NOTA TECNICA"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="usuario_onu">USUARIO ONU</label>
+            <input id="usuario_onu" type="text" data-label="USUARIO ONU">
+          </div>
+
+          <div class="field">
+            <label for="contrasena_onu">CONTRASEÑA ONU</label>
+            <input id="contrasena_onu" type="text" data-label="CONTRASEÑA ONU">
+          </div>
+
+          <div class="field">
+            <label for="wifi">WIFI</label>
+            <input id="wifi" type="text" data-label="WIFI">
+          </div>
+
+          <div class="field">
+            <label for="contrasena_wifi">CONTRASEÑA</label>
+            <input id="contrasena_wifi" type="text" data-label="CONTRASEÑA">
+          </div>
+
+          <div class="field">
+            <label for="ip">IP</label>
+            <input id="ip" type="text" data-label="IP">
+          </div>
+
+          <div class="field">
+            <label for="rx">RX</label>
+            <input id="rx" type="text" data-label="RX">
+          </div>
+
+          <div class="field">
+            <label for="rt">RT</label>
+            <input id="rt" type="text" data-label="RT">
+          </div>
+
+          <div class="field">
+            <label for="tv">TV CON SEÑAL</label>
+            <select id="tv" data-label="TV CON SEÑAL">
+              <option value="">---------</option>
+              <option value="SI">SI</option>
+              <option value="NO">NO</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="mechas">MECHAS</label>
+            <input id="mechas" type="text" data-label="MECHAS">
+          </div>
+
+          <div class="field">
+            <label for="vineta">VIÑETA</label>
+            <input id="vineta" type="text" data-label="VIÑETA">
+          </div>
+
+          <div class="field">
+            <label for="vineta_rec">VIÑETA RECUPERADA</label>
+            <input id="vineta_rec" type="text" data-label="VIÑETA RECUPERADA">
+          </div>
+
+          <div class="field">
+            <label for="mac_onu">MAC ONU</label>
+            <input id="mac_onu" type="text" data-label="MAC ONU">
+          </div>
+
+          <div class="field">
+            <label for="mac_onu_rec">MAC ONU REC</label>
+            <input id="mac_onu_rec" type="text" data-label="MAC ONU REC">
+          </div>
+
+            <div class="field full">
+            <label>SN CAJA</label>
+            <div id="snCajaContainer" class="dynamic-list">
+                <div class="dynamic-item">
+                <input type="text" class="dynamic-input" data-group-label="SN CAJA" placeholder="Ingrese SN de caja">
+                <button type="button" class="btn-remove" onclick="eliminarItem(this)">×</button>
+                </div>
+            </div>
+            <button type="button" class="btn-add" onclick="agregarCampo('snCajaContainer', 'SN CAJA', 'Ingrese SN de caja')">
+                + Agregar otra caja
+            </button>
+            </div>
+
+            <div class="field full">
+            <label>SN CAJA REC</label>
+            <div id="snCajaRecContainer" class="dynamic-list">
+                <div class="dynamic-item">
+                <input type="text" class="dynamic-input" data-group-label="SN CAJA REC" placeholder="Ingrese SN de caja recuperada">
+                <button type="button" class="btn-remove" onclick="eliminarItem(this)">×</button>
+                </div>
+            </div>
+            <button type="button" class="btn-add" onclick="agregarCampo('snCajaRecContainer', 'SN CAJA REC', 'Ingrese SN de caja recuperada')">
+                + Agregar otra caja recuperada
+            </button>
+            </div>
+
+          <div class="field">
+            <label for="mac_router">MAC ROUTER</label>
+            <input id="mac_router" type="text" data-label="MAC ROUTER">
+          </div>
+
+          <div class="field">
+            <label for="mac_router_rec">MAC ROUTER REC</label>
+            <input id="mac_router_rec" type="text" data-label="MAC ROUTER REC">
+          </div>
+
+          <div class="field">
+            <label for="fibra">FIBRA</label>
+            <input id="fibra" type="text" data-label="FIBRA">
+          </div>
+
+          <div class="field">
+            <label for="rg6">RG6</label>
+            <input id="rg6" type="text" data-label="RG6">
+          </div>
+
+          <div class="field">
+            <label for="cable_red">CABLE DE RED</label>
+            <input id="cable_red" type="text" data-label="CABLE DE RED">
+          </div>
+
+          <div class="field">
+            <label for="conector_apc">CONECTOR APC</label>
+            <input id="conector_apc" type="text" data-label="CONECTOR APC">
+          </div>
+
+          <div class="field">
+            <label for="conector_rg6">CONECTOR RG6</label>
+            <input id="conector_rg6" type="text" data-label="CONECTOR RG6">
+          </div>
+
+          <div class="field">
+            <label for="conector_rj45">CONECTOR RJ45</label>
+            <input id="conector_rj45" type="text" data-label="CONECTOR RJ45">
+          </div>
+
+          <div class="field">
+            <label for="spliter_2">SPLITER DE 2</label>
+            <input id="spliter_2" type="text" data-label="SPLITER DE 2">
+          </div>
+
+          <div class="field">
+            <label for="spliter_3">SPLITER DE 3</label>
+            <input id="spliter_3" type="text" data-label="SPLITER DE 3">
+          </div>
+
+          <div class="field">
+            <label for="mordazas">MORDAZAS</label>
+            <input id="mordazas" type="text" data-label="MORDAZAS">
+          </div>
+
+          <div class="field">
+            <label for="union_optica">UNIÓN ÓPTICA</label>
+            <input id="union_optica" type="text" data-label="UNIÓN ÓPTICA">
+          </div>
+
+          <div class="field">
+            <label for="union_rg6">UNIÓN RG6</label>
+            <input id="union_rg6" type="text" data-label="UNIÓN RG6">
+          </div>
+
+          <div class="field">
+            <label for="grapas">GRAPAS</label>
+            <input id="grapas" type="text" data-label="GRAPAS">
+          </div>
+
+          <div class="field">
+            <label for="cinta">CINTA AISLANTE (SI/NO)</label>
+            <select id="cinta" data-label="CINTA AISLANTE (SI/NO)">
+              <option value="">---------</option>
+              <option value="SI">SI</option>
+              <option value="NO">NO</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn primary" onclick="copiarFormato()">Copiar</button>
+          <button type="button" class="btn success" onclick="copiarYAbrirWhatsApp()">Copiar y abrir WhatsApp</button>
+          <button type="button" class="btn light" onclick="limpiarFormulario()">Limpiar</button>
+        </div>
+
+        <div class="preview-wrap">
+          <label for="vistaPrevia">Vista previa</label>
+          <textarea id="vistaPrevia" rows="12" readonly></textarea>
+        </div>
+      </form>
+    </section>
+  </main>
+
+<script>
+  function obtenerCampos() {
+    return document.querySelectorAll('[data-label]');
+  }
+
+  function obtenerCamposDinamicosAgrupados() {
+    const grupos = {};
+    const inputs = document.querySelectorAll('.dynamic-input');
+
+    inputs.forEach(input => {
+      const label = input.dataset.groupLabel;
+      const valor = (input.value || '').trim();
+
+      if (valor !== '') {
+        if (!grupos[label]) {
+          grupos[label] = [];
+        }
+        grupos[label].push(valor);
+      }
+    });
+
+    return grupos;
+  }
+
+  function generarTexto() {
+    const campos = obtenerCampos();
+    const lineas = [];
+
+    campos.forEach(campo => {
+      const etiqueta = campo.dataset.label;
+      const valor = (campo.value || '').trim();
+
+      if (valor !== '') {
+        lineas.push(`${etiqueta}: ${valor}`);
+      }
+    });
+
+    const gruposDinamicos = obtenerCamposDinamicosAgrupados();
+
+    Object.entries(gruposDinamicos).forEach(([etiqueta, valores]) => {
+      if (valores.length > 0) {
+        lineas.push(`${etiqueta}: ${valores.join(', ')}`);
+      }
+    });
+
+    return lineas.join('\n');
+  }
+
+  function actualizarVistaPrevia() {
+    document.getElementById('vistaPrevia').value = generarTexto();
+  }
+
+  async function copiarFormato() {
+    const texto = generarTexto();
+
+    if (!texto) {
+      alert('Llena al menos un campo antes de copiar.');
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(texto);
+      actualizarVistaPrevia();
+      alert('Información copiada correctamente.');
+    } catch (e) {
+      alert('No se pudo copiar automáticamente.');
+    }
+  }
+
+  async function copiarYAbrirWhatsApp() {
+    const texto = generarTexto();
+
+    if (!texto) {
+      alert('Llena al menos un campo antes de continuar.');
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(texto);
+    } catch (e) {}
+
+    actualizarVistaPrevia();
+    window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`, '_blank');
+  }
+
+  function limpiarFormulario() {
+    document.getElementById('formTecnico').reset();
+
+    document.querySelectorAll('.dynamic-list').forEach(container => {
+      const items = container.querySelectorAll('.dynamic-item');
+      items.forEach((item, index) => {
+        if (index > 0) item.remove();
+      });
+
+      const primerInput = container.querySelector('.dynamic-input');
+      if (primerInput) primerInput.value = '';
+    });
+
+    actualizarVistaPrevia();
+  }
+
+  function agregarCampo(containerId, label, placeholder = '') {
+    const container = document.getElementById(containerId);
+
+    const item = document.createElement('div');
+    item.className = 'dynamic-item';
+
+    item.innerHTML = `
+      <input type="text" class="dynamic-input" data-group-label="${label}" placeholder="${placeholder}">
+      <button type="button" class="btn-remove" onclick="eliminarItem(this)">×</button>
+    `;
+
+    container.appendChild(item);
+    actualizarVistaPrevia();
+  }
+
+  function eliminarItem(btn) {
+    const item = btn.closest('.dynamic-item');
+    const container = item.parentElement;
+    const items = container.querySelectorAll('.dynamic-item');
+
+    if (items.length > 1) {
+      item.remove();
+    } else {
+      const input = item.querySelector('input');
+      if (input) input.value = '';
+    }
+
+    actualizarVistaPrevia();
+  }
+
+  document.addEventListener('input', function (e) {
+    if (e.target.matches('[data-label], .dynamic-input')) {
+      actualizarVistaPrevia();
+    }
+  });
+
+  document.addEventListener('change', function (e) {
+    if (e.target.matches('[data-label], .dynamic-input')) {
+      actualizarVistaPrevia();
+    }
+  });
+
+  actualizarVistaPrevia();
+</script>
+
+</body>
+</html>
