@@ -15,11 +15,27 @@
       </div>
 
       <form id="formTecnico" class="form" onsubmit="return false;">
-        <div class="grid">
-          <div class="field full">
-            <label for="tecnicos">TÉCNICOS (EMPRESA)</label>
-            <input id="tecnicos" type="text" data-label="TÉCNICOS (EMPRESA)" placeholder="Técnico líder / Técnico auxiliar">
-          </div>
+  <div class="grid">
+
+    <div class="field">
+      <label for="empresa">EMPRESA</label>
+      <select id="empresa" data-label="EMPRESA">
+        <option value="">Seleccione una empresa</option>
+        <option value="Multicables">Multicables</option>
+        <option value="Insertel">Insertel</option>
+        <option value="Coingpex">Coingpex</option>
+      </select>
+    </div>
+
+    <div class="field full">
+      <label for="tecnicos">TÉCNICOS</label>
+      <input
+        id="tecnicos"
+        type="text"
+        data-label="TÉCNICOS (EMPRESA)"
+        placeholder="Técnico líder / Técnico auxiliar"
+      >
+    </div>
 
           <div class="field">
             <label for="codigo">CODIGO/#TAREA</label>
