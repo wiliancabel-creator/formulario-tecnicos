@@ -236,8 +236,8 @@
   </main>
 
 <script>
-  function obtenerCampos() {
-    return document.querySelectorAll('[data-label]');
+  function obtenerValor(id) {
+    return (document.getElementById(id)?.value || '').trim();
   }
 
   function obtenerCamposDinamicosAgrupados() {
@@ -249,9 +249,7 @@
       const valor = (input.value || '').trim();
 
       if (valor !== '') {
-        if (!grupos[label]) {
-          grupos[label] = [];
-        }
+        if (!grupos[label]) grupos[label] = [];
         grupos[label].push(valor);
       }
     });
@@ -260,27 +258,97 @@
   }
 
   function generarTexto() {
-    const campos = obtenerCampos();
-    const lineas = [];
-
-    campos.forEach(campo => {
-      const etiqueta = campo.dataset.label;
-      const valor = (campo.value || '').trim();
-
-      if (valor !== '') {
-        lineas.push(`${etiqueta}: ${valor}`);
-      }
-    });
-
+    const bloques = [];
     const gruposDinamicos = obtenerCamposDinamicosAgrupados();
 
-    Object.entries(gruposDinamicos).forEach(([etiqueta, valores]) => {
-      if (valores.length > 0) {
-        lineas.push(`${etiqueta}: ${valores.join(', ')}`);
-      }
-    });
+    const encabezado = [];
+    if (obtenerValor('empresa')) encabezado.push(`EMPRESA: ${obtenerValor('empresa')}`);
+    if (obtenerValor('tecnicos')) encabezado.push(`TÉCNICOS (EMPRESA): ${obtenerValor('tecnicos')}`);
+    if (obtenerValor('codigo')) encabezado.push(`CODIGO/#TAREA: ${obtenerValor('codigo')}`);
 
-    return lineas.join('\n');
+    if (encabezado.length) {
+      bloques.push(encabezado.join('\n'));
+    }
+
+    if (obtenerValor('nota')) {
+      bloques.push(
+`━━━━━━━━━━━━━━━━━━
+NOTA TECNICA
+━━━━━━━━━━━━━━━━━━
+${obtenerValor('nota')}`
+      );
+    }
+
+    const conexion = [];
+    if (obtenerValor('usuario_onu')) conexion.push(`USUARIO ONU: ${obtenerValor('usuario_onu')}`);
+    if (obtenerValor('contrasena_onu')) conexion.push(`CONTRASEÑA ONU: ${obtenerValor('contrasena_onu')}`);
+    if (obtenerValor('wifi')) conexion.push(`WIFI: ${obtenerValor('wifi')}`);
+    if (obtenerValor('contrasena_wifi')) conexion.push(`CONTRASEÑA: ${obtenerValor('contrasena_wifi')}`);
+    if (obtenerValor('ip')) conexion.push(`IP: ${obtenerValor('ip')}`);
+    if (obtenerValor('rx')) conexion.push(`RX: ${obtenerValor('rx')}`);
+    if (obtenerValor('rt')) conexion.push(`RT: ${obtenerValor('rt')}`);
+    if (obtenerValor('tv')) conexion.push(`TV CON SEÑAL: ${obtenerValor('tv')}`);
+
+    if (conexion.length) {
+      bloques.push(
+`━━━━━━━━━━━━━━━━━━
+DATOS DE CONEXIÓN
+━━━━━━━━━━━━━━━━━━
+${conexion.join('\n')}`
+      );
+    }
+
+    const identificacion = [];
+    if (obtenerValor('mechas')) identificacion.push(`MECHAS: ${obtenerValor('mechas')}`);
+    if (obtenerValor('vineta')) identificacion.push(`VIÑETA: ${obtenerValor('vineta')}`);
+    if (obtenerValor('vineta_rec')) identificacion.push(`VIÑETA RECUPERADA: ${obtenerValor('vineta_rec')}`);
+    if (obtenerValor('mac_onu')) identificacion.push(`MAC ONU: ${obtenerValor('mac_onu')}`);
+    if (obtenerValor('mac_onu_rec')) identificacion.push(`MAC ONU REC: ${obtenerValor('mac_onu_rec')}`);
+    if (obtenerValor('mac_router')) identificacion.push(`MAC ROUTER: ${obtenerValor('mac_router')}`);
+    if (obtenerValor('mac_router_rec')) identificacion.push(`MAC ROUTER REC: ${obtenerValor('mac_router_rec')}`);
+
+    if (gruposDinamicos['SN CAJA']?.length) {
+      identificacion.push(`SN CAJA: ${gruposDinamicos['SN CAJA'].join(', ')}`);
+    }
+
+    if (gruposDinamicos['SN CAJA REC']?.length) {
+      identificacion.push(`SN CAJA REC: ${gruposDinamicos['SN CAJA REC'].join(', ')}`);
+    }
+
+    if (identificacion.length) {
+      bloques.push(
+`━━━━━━━━━━━━━━━━━━
+IDENTIFICACIÓN / EQUIPOS
+━━━━━━━━━━━━━━━━━━
+${identificacion.join('\n')}`
+      );
+    }
+
+    const materiales = [];
+    if (obtenerValor('fibra')) materiales.push(`FIBRA: ${obtenerValor('fibra')}`);
+    if (obtenerValor('rg6')) materiales.push(`RG6: ${obtenerValor('rg6')}`);
+    if (obtenerValor('cable_red')) materiales.push(`CABLE DE RED: ${obtenerValor('cable_red')}`);
+    if (obtenerValor('conector_apc')) materiales.push(`CONECTOR APC: ${obtenerValor('conector_apc')}`);
+    if (obtenerValor('conector_rg6')) materiales.push(`CONECTOR RG6: ${obtenerValor('conector_rg6')}`);
+    if (obtenerValor('conector_rj45')) materiales.push(`CONECTOR RJ45: ${obtenerValor('conector_rj45')}`);
+    if (obtenerValor('spliter_2')) materiales.push(`SPLITER DE 2: ${obtenerValor('spliter_2')}`);
+    if (obtenerValor('spliter_3')) materiales.push(`SPLITER DE 3: ${obtenerValor('spliter_3')}`);
+    if (obtenerValor('mordazas')) materiales.push(`MORDAZAS: ${obtenerValor('mordazas')}`);
+    if (obtenerValor('union_optica')) materiales.push(`UNIÓN ÓPTICA: ${obtenerValor('union_optica')}`);
+    if (obtenerValor('union_rg6')) materiales.push(`UNIÓN RG6: ${obtenerValor('union_rg6')}`);
+    if (obtenerValor('grapas')) materiales.push(`GRAPAS: ${obtenerValor('grapas')}`);
+    if (obtenerValor('cinta')) materiales.push(`CINTA AISLANTE (SI/NO): ${obtenerValor('cinta')}`);
+
+    if (materiales.length) {
+      bloques.push(
+`━━━━━━━━━━━━━━━━━━
+MATERIALES UTILIZADOS
+━━━━━━━━━━━━━━━━━━
+${materiales.join('\n')}`
+      );
+    }
+
+    return bloques.join('\n\n');
   }
 
   function actualizarVistaPrevia() {
@@ -325,6 +393,7 @@
 
     document.querySelectorAll('.dynamic-list').forEach(container => {
       const items = container.querySelectorAll('.dynamic-item');
+
       items.forEach((item, index) => {
         if (index > 0) item.remove();
       });
