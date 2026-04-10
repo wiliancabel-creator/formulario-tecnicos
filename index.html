@@ -263,7 +263,7 @@
 
     const encabezado = [];
     if (obtenerValor('empresa')) encabezado.push(`EMPRESA: ${obtenerValor('empresa')}`);
-    if (obtenerValor('tecnicos')) encabezado.push(`TÉCNICOS (EMPRESA): ${obtenerValor('tecnicos')}`);
+    if (obtenerValor('tecnicos')) encabezado.push(`TÉCNICOS:${obtenerValor('tecnicos')}`);
     if (obtenerValor('codigo')) encabezado.push(`CODIGO/#TAREA: ${obtenerValor('codigo')}`);
 
     if (encabezado.length) {
