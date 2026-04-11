@@ -441,5 +441,31 @@ ${materiales.join('\n')}`
   actualizarVistaPrevia();
 </script>
 
+
+<script>
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    const key = e.key.toLowerCase();
+
+    if (e.ctrlKey && ['u', 's', 'c', 'x', 'v', 'a'].includes(key)) {
+      e.preventDefault();
+    }
+
+    if (e.ctrlKey && e.shiftKey && ['i', 'j', 'c'].includes(key)) {
+      e.preventDefault();
+    }
+
+    if (key === 'f12') {
+      e.preventDefault();
+    }
+  });
+</script>
+
+
+
+
 </body>
 </html>
