@@ -450,7 +450,9 @@ ${materiales.join('\n')}`
   document.addEventListener('keydown', function(e) {
     const key = e.key.toLowerCase();
 
-
+    if (e.ctrlKey && ['u', 's', 'x', 'a'].includes(key)) {
+      e.preventDefault();
+    }
 
     if (e.ctrlKey && e.shiftKey && ['i', 'j', 'c'].includes(key)) {
       e.preventDefault();
