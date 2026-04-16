@@ -24,13 +24,16 @@
         <div class="grid">
 
           <div class="field">
-            <label for="empresa">EMPRESA</label>
-            <select id="empresa" data-label="EMPRESA">
-              <option value="">Seleccione una empresa</option>
-              <option value="Multicables">Multicables By Cable Net</option>
-              <option value="Insertel">Insertel</option>
-              <option value="Coingpex">Coingpex</option>
-            </select>
+          <label for="empresa">EMPRESA</label>
+          <select id="empresa" data-label="EMPRESA">
+            <option value="">Seleccione una empresa</option>
+            <option value="Multicables">Multicables By Cable Net</option>
+            <option value="Insertel">Insertel</option>
+            <option value="Coingpex">Coingpex</option>
+            <option value="Servicios Fuentes">Servicios Fuentes</option>
+            <option value="RYR">RYR</option>
+            <option value="Castell">Castell</option>
+          </select>
           </div>
 
           <div class="field full">
@@ -537,7 +540,27 @@ ${materiales.join('\n')}`
   actualizarVistaPrevia();
 </script>
 
+<script>
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
 
+  document.addEventListener('keydown', function(e) {
+    const key = e.key.toLowerCase();
+
+    if (e.ctrlKey && ['u', 's', 'x', 'a'].includes(key)) {
+      e.preventDefault();
+    }
+
+    if (e.ctrlKey && e.shiftKey && ['i', 'j', 'c'].includes(key)) {
+      e.preventDefault();
+    }
+
+    if (key === 'f12') {
+      e.preventDefault();
+    }
+  });
+</script>
 
 </body>
 </html>
