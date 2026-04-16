@@ -20,7 +20,13 @@
         <p>Llena solo lo necesario. Al copiar, solo saldrán los campos con información.</p>
       </div>
 
+      
       <form id="formTecnico" class="form" onsubmit="return false;">
+<div class="actions top-actions">
+  <button type="button" class="btn primary" onclick="copiarFormato()">Copiar</button>
+  <button type="button" class="btn success" onclick="copiarYAbrirWhatsApp()">Copiar y abrir WhatsApp</button>
+  <button type="button" class="btn light" onclick="limpiarFormulario()">Limpiar</button>
+</div>
         <div class="grid">
 
           <div class="field">
@@ -292,6 +298,97 @@
     return grupos;
   }
 
+  function guardarFormulario() {
+    const datos = {};
+
+    document.querySelectorAll('[data-label]').forEach(campo => {
+      if (campo.id) {
+        datos[campo.id] = campo.value;
+      }
+    });
+
+    const dinamicos = [];
+    document.querySelectorAll('.dynamic-input').forEach(input => {
+      dinamicos.push({
+        value: input.value,
+        label: input.dataset.groupLabel
+      });
+    });
+
+    datos._dynamic = dinamicos;
+
+    localStorage.setItem('formularioTecnico', JSON.stringify(datos));
+  }
+
+  function cargarFormulario() {
+    const guardado = localStorage.getItem('formularioTecnico');
+
+    if (!guardado) return;
+
+    try {
+      const datos = JSON.parse(guardado);
+
+      Object.keys(datos).forEach(key => {
+        if (key === '_dynamic') return;
+
+        const campo = document.getElementById(key);
+        if (campo) {
+          campo.value = datos[key];
+        }
+      });
+
+      if (Array.isArray(datos._dynamic)) {
+        const snCajaItems = datos._dynamic.filter(item => item.label === 'SN CAJA');
+        const snCajaRecItems = datos._dynamic.filter(item => item.label === 'SN CAJA REC');
+
+        restaurarCamposDinamicos(
+          'snCajaContainer',
+          'SN CAJA',
+          'Ingrese SN de caja',
+          snCajaItems
+        );
+
+        restaurarCamposDinamicos(
+          'snCajaRecContainer',
+          'SN CAJA REC',
+          'Ingrese SN de caja recuperada',
+          snCajaRecItems
+        );
+      }
+
+      actualizarVistaPrevia();
+    } catch (e) {
+      console.error('Error cargando formulario', e);
+    }
+  }
+
+  function restaurarCamposDinamicos(containerId, label, placeholder, items) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    if (!items.length) {
+      agregarCampo(containerId, label, placeholder);
+      return;
+    }
+
+    items.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'dynamic-item';
+
+      div.innerHTML = `
+        <div class="scan-field">
+          <input type="text" class="dynamic-input" data-group-label="${label}" placeholder="${placeholder}" value="${item.value || ''}">
+          <button type="button" class="btn-scan" onclick="abrirScannerDinamico(this)">📷</button>
+        </div>
+        <button type="button" class="btn-remove" onclick="eliminarItem(this)">×</button>
+      `;
+
+      container.appendChild(div);
+    });
+  }
+
   function generarTexto() {
     const bloques = [];
     const gruposDinamicos = obtenerCamposDinamicosAgrupados();
@@ -429,6 +526,7 @@ ${materiales.join('\n')}`
       if (primerInput) primerInput.value = '';
     });
 
+    localStorage.removeItem('formularioTecnico');
     actualizarVistaPrevia();
   }
 
@@ -447,6 +545,7 @@ ${materiales.join('\n')}`
     `;
 
     container.appendChild(item);
+    guardarFormulario();
     actualizarVistaPrevia();
   }
 
@@ -462,6 +561,7 @@ ${materiales.join('\n')}`
       if (input) input.value = '';
     }
 
+    guardarFormulario();
     actualizarVistaPrevia();
   }
 
@@ -495,6 +595,7 @@ ${materiales.join('\n')}`
       function(decodedText) {
         if (inputDestino) {
           inputDestino.value = decodedText;
+          guardarFormulario();
           actualizarVistaPrevia();
         }
         cerrarScanner();
@@ -528,15 +629,18 @@ ${materiales.join('\n')}`
   document.addEventListener('input', function (e) {
     if (e.target.matches('[data-label], .dynamic-input')) {
       actualizarVistaPrevia();
+      guardarFormulario();
     }
   });
 
   document.addEventListener('change', function (e) {
     if (e.target.matches('[data-label], .dynamic-input')) {
       actualizarVistaPrevia();
+      guardarFormulario();
     }
   });
 
+  cargarFormulario();
   actualizarVistaPrevia();
 </script>
 
