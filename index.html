@@ -4,10 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Formato técnico rápido</title>
+
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="shortcut icon" href="site.webmanifest">
-<link rel="stylesheet" href="styles.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="shortcut icon" href="site.webmanifest">
+  <link rel="stylesheet" href="styles.css" />
+
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 </head>
 <body>
   <main class="app">
@@ -18,27 +21,27 @@
       </div>
 
       <form id="formTecnico" class="form" onsubmit="return false;">
-  <div class="grid">
+        <div class="grid">
 
-    <div class="field">
-      <label for="empresa">EMPRESA</label>
-      <select id="empresa" data-label="EMPRESA">
-        <option value="">Seleccione una empresa</option>
-        <option value="Multicables">Multicables By Cable Net</option>
-        <option value="Insertel">Insertel</option>
-        <option value="Coingpex">Coingpex</option>
-      </select>
-    </div>
+          <div class="field">
+            <label for="empresa">EMPRESA</label>
+            <select id="empresa" data-label="EMPRESA">
+              <option value="">Seleccione una empresa</option>
+              <option value="Multicables">Multicables By Cable Net</option>
+              <option value="Insertel">Insertel</option>
+              <option value="Coingpex">Coingpex</option>
+            </select>
+          </div>
 
-    <div class="field full">
-      <label for="tecnicos">TÉCNICOS</label>
-      <input
-        id="tecnicos"
-        type="text"
-        data-label="TÉCNICOS (EMPRESA)"
-        placeholder="Técnico líder / Técnico auxiliar"
-      >
-    </div>
+          <div class="field full">
+            <label for="tecnicos">TÉCNICOS</label>
+            <input
+              id="tecnicos"
+              type="text"
+              data-label="TÉCNICOS (EMPRESA)"
+              placeholder="Técnico líder / Técnico auxiliar"
+            >
+          </div>
 
           <div class="field">
             <label for="codigo">CODIGO/#TAREA</label>
@@ -107,48 +110,66 @@
 
           <div class="field">
             <label for="mac_onu">MAC ONU</label>
-            <input id="mac_onu" type="text" data-label="MAC ONU">
+            <div class="scan-field">
+              <input id="mac_onu" type="text" data-label="MAC ONU">
+              <button type="button" class="btn-scan" onclick="abrirScanner('mac_onu')">📷</button>
+            </div>
           </div>
 
           <div class="field">
             <label for="mac_onu_rec">MAC ONU REC</label>
-            <input id="mac_onu_rec" type="text" data-label="MAC ONU REC">
+            <div class="scan-field">
+              <input id="mac_onu_rec" type="text" data-label="MAC ONU REC">
+              <button type="button" class="btn-scan" onclick="abrirScanner('mac_onu_rec')">📷</button>
+            </div>
           </div>
 
-            <div class="field full">
+          <div class="field full">
             <label>SN CAJA</label>
             <div id="snCajaContainer" class="dynamic-list">
-                <div class="dynamic-item">
-                <input type="text" class="dynamic-input" data-group-label="SN CAJA" placeholder="Ingrese SN de caja">
-                <button type="button" class="btn-remove" onclick="eliminarItem(this)">×</button>
+              <div class="dynamic-item">
+                <div class="scan-field">
+                  <input type="text" class="dynamic-input" data-group-label="SN CAJA" placeholder="Ingrese SN de caja">
+                  <button type="button" class="btn-scan" onclick="abrirScannerDinamico(this)">📷</button>
                 </div>
+                <button type="button" class="btn-remove" onclick="eliminarItem(this)">×</button>
+              </div>
             </div>
             <button type="button" class="btn-add" onclick="agregarCampo('snCajaContainer', 'SN CAJA', 'Ingrese SN de caja')">
-                + Agregar otra caja
+              + Agregar otra caja
             </button>
-            </div>
+          </div>
 
-            <div class="field full">
+          <div class="field full">
             <label>SN CAJA REC</label>
             <div id="snCajaRecContainer" class="dynamic-list">
-                <div class="dynamic-item">
-                <input type="text" class="dynamic-input" data-group-label="SN CAJA REC" placeholder="Ingrese SN de caja recuperada">
-                <button type="button" class="btn-remove" onclick="eliminarItem(this)">×</button>
+              <div class="dynamic-item">
+                <div class="scan-field">
+                  <input type="text" class="dynamic-input" data-group-label="SN CAJA REC" placeholder="Ingrese SN de caja recuperada">
+                  <button type="button" class="btn-scan" onclick="abrirScannerDinamico(this)">📷</button>
                 </div>
+                <button type="button" class="btn-remove" onclick="eliminarItem(this)">×</button>
+              </div>
             </div>
             <button type="button" class="btn-add" onclick="agregarCampo('snCajaRecContainer', 'SN CAJA REC', 'Ingrese SN de caja recuperada')">
-                + Agregar otra caja recuperada
+              + Agregar otra caja recuperada
             </button>
-            </div>
+          </div>
 
           <div class="field">
             <label for="mac_router">MAC ROUTER</label>
-            <input id="mac_router" type="text" data-label="MAC ROUTER">
+            <div class="scan-field">
+              <input id="mac_router" type="text" data-label="MAC ROUTER">
+              <button type="button" class="btn-scan" onclick="abrirScanner('mac_router')">📷</button>
+            </div>
           </div>
 
           <div class="field">
             <label for="mac_router_rec">MAC ROUTER REC</label>
-            <input id="mac_router_rec" type="text" data-label="MAC ROUTER REC">
+            <div class="scan-field">
+              <input id="mac_router_rec" type="text" data-label="MAC ROUTER REC">
+              <button type="button" class="btn-scan" onclick="abrirScanner('mac_router_rec')">📷</button>
+            </div>
           </div>
 
           <div class="field">
@@ -235,7 +256,18 @@
     </section>
   </main>
 
+  <div id="scannerModal" class="scanner-modal" style="display:none;">
+    <div class="scanner-box">
+      <h3>Escanear código</h3>
+      <div id="reader"></div>
+      <button type="button" class="btn light" onclick="cerrarScanner()">Cerrar</button>
+    </div>
+  </div>
+
 <script>
+  let html5QrCode = null;
+  let inputDestino = null;
+
   function obtenerValor(id) {
     return (document.getElementById(id)?.value || '').trim();
   }
@@ -270,12 +302,12 @@
       bloques.push(encabezado.join('\n'));
     }
 
-if (obtenerValor('nota')) {
-  bloques.push(
+    if (obtenerValor('nota')) {
+      bloques.push(
 `*NOTA TECNICA*
 ${obtenerValor('nota')}`
-  );
-}
+      );
+    }
 
     const conexion = [];
     if (obtenerValor('usuario_onu')) conexion.push(`USUARIO ONU: ${obtenerValor('usuario_onu')}`);
@@ -287,12 +319,13 @@ ${obtenerValor('nota')}`
     if (obtenerValor('rt')) conexion.push(`RT: ${obtenerValor('rt')}`);
     if (obtenerValor('tv')) conexion.push(`TV CON SEÑAL: ${obtenerValor('tv')}`);
 
-if (conexion.length) {
-  bloques.push(
+    if (conexion.length) {
+      bloques.push(
 `*DATOS DE CONEXIÓN*
 ${conexion.join('\n')}`
-  );
-}
+      );
+    }
+
     const identificacion = [];
     if (obtenerValor('mechas')) identificacion.push(`MECHAS: ${obtenerValor('mechas')}`);
     if (obtenerValor('vineta')) identificacion.push(`VIÑETA: ${obtenerValor('vineta')}`);
@@ -310,12 +343,12 @@ ${conexion.join('\n')}`
       identificacion.push(`SN CAJA REC: ${gruposDinamicos['SN CAJA REC'].join(', ')}`);
     }
 
-if (identificacion.length) {
-  bloques.push(
+    if (identificacion.length) {
+      bloques.push(
 `*IDENTIFICACIÓN / EQUIPOS*
 ${identificacion.join('\n')}`
-  );
-}
+      );
+    }
 
     const materiales = [];
     if (obtenerValor('fibra')) materiales.push(`FIBRA: ${obtenerValor('fibra')}`);
@@ -332,12 +365,12 @@ ${identificacion.join('\n')}`
     if (obtenerValor('grapas')) materiales.push(`GRAPAS: ${obtenerValor('grapas')}`);
     if (obtenerValor('cinta')) materiales.push(`CINTA AISLANTE (SI/NO): ${obtenerValor('cinta')}`);
 
-if (materiales.length) {
-  bloques.push(
+    if (materiales.length) {
+      bloques.push(
 `*MATERIALES UTILIZADOS*
 ${materiales.join('\n')}`
-  );
-}
+      );
+    }
 
     return bloques.join('\n\n');
   }
@@ -403,7 +436,10 @@ ${materiales.join('\n')}`
     item.className = 'dynamic-item';
 
     item.innerHTML = `
-      <input type="text" class="dynamic-input" data-group-label="${label}" placeholder="${placeholder}">
+      <div class="scan-field">
+        <input type="text" class="dynamic-input" data-group-label="${label}" placeholder="${placeholder}">
+        <button type="button" class="btn-scan" onclick="abrirScannerDinamico(this)">📷</button>
+      </div>
       <button type="button" class="btn-remove" onclick="eliminarItem(this)">×</button>
     `;
 
@@ -426,6 +462,66 @@ ${materiales.join('\n')}`
     actualizarVistaPrevia();
   }
 
+  function abrirScanner(idCampo) {
+    inputDestino = document.getElementById(idCampo);
+    iniciarScanner();
+  }
+
+  function abrirScannerDinamico(btn) {
+    inputDestino = btn.parentElement.querySelector('input');
+    iniciarScanner();
+  }
+
+  function iniciarScanner() {
+    document.getElementById('scannerModal').style.display = 'flex';
+
+    html5QrCode = new Html5Qrcode("reader");
+
+    html5QrCode.start(
+      { facingMode: "environment" },
+      {
+        fps: 10,
+        qrbox: { width: 250, height: 120 },
+        formatsToSupport: [
+          Html5QrcodeSupportedFormats.CODE_128,
+          Html5QrcodeSupportedFormats.CODE_39,
+          Html5QrcodeSupportedFormats.EAN_13,
+          Html5QrcodeSupportedFormats.EAN_8
+        ]
+      },
+      function(decodedText) {
+        if (inputDestino) {
+          inputDestino.value = decodedText;
+          actualizarVistaPrevia();
+        }
+        cerrarScanner();
+      },
+      function(errorMessage) {}
+    ).catch(err => {
+      alert('No se pudo abrir la cámara.');
+      cerrarScanner();
+    });
+  }
+
+  function cerrarScanner() {
+    const modal = document.getElementById('scannerModal');
+
+    if (html5QrCode) {
+      html5QrCode.stop()
+        .then(() => {
+          html5QrCode.clear();
+          html5QrCode = null;
+          modal.style.display = 'none';
+        })
+        .catch(() => {
+          modal.style.display = 'none';
+          html5QrCode = null;
+        });
+    } else {
+      modal.style.display = 'none';
+    }
+  }
+
   document.addEventListener('input', function (e) {
     if (e.target.matches('[data-label], .dynamic-input')) {
       actualizarVistaPrevia();
@@ -440,30 +536,6 @@ ${materiales.join('\n')}`
 
   actualizarVistaPrevia();
 </script>
-
-
-<script>
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-  });
-
-  document.addEventListener('keydown', function(e) {
-    const key = e.key.toLowerCase();
-
-    if (e.ctrlKey && ['u', 's', 'x', 'a'].includes(key)) {
-      e.preventDefault();
-    }
-
-    if (e.ctrlKey && e.shiftKey && ['i', 'j', 'c'].includes(key)) {
-      e.preventDefault();
-    }
-
-    if (key === 'f12') {
-      e.preventDefault();
-    }
-  });
-</script>
-
 
 
 
