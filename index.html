@@ -121,7 +121,7 @@
           <div class="field">
             <label for="mac_onu">MAC ONU NUEVA // O ACTUAL</label>
             <div class="scan-field">
-              <input id="mac_onu" type="text" data-label="MAC ONU"data-required="true">
+              <input id="mac_onu" type="text" data-label="MAC ONU" data-required="true" minlength="12">
               <button type="button" class="btn-scan" onclick="abrirScanner('mac_onu')">📷</button>
             </div>
           </div>
@@ -129,7 +129,7 @@
           <div class="field">
             <label for="mac_onu_rec">MAC ONU REC</label>
             <div class="scan-field">
-              <input id="mac_onu_rec" type="text" data-label="MAC ONU REC">
+              <input id="mac_onu_rec" type="text" data-label="MAC ONU REC" minlength="12">
               <button type="button" class="btn-scan" onclick="abrirScanner('mac_onu_rec')">📷</button>
             </div>
           </div>
@@ -370,6 +370,43 @@
       return true;
     }
 
+  function validarMacs() {
+    const reglas = [
+      { id: 'mac_onu', nombre: 'MAC ONU NUEVA // O ACTUAL', requerido: true },
+      { id: 'mac_onu_rec', nombre: 'MAC ONU REC', requerido: false }
+    ];
+
+    const invalidos = [];
+
+    reglas.forEach(({ id, nombre, requerido }) => {
+      const campo = document.getElementById(id);
+      if (!campo) return;
+
+      const valor = (campo.value || '').trim();
+      campo.classList.remove('required-error');
+
+      if (!valor) {
+        if (requerido) {
+          campo.classList.add('required-error');
+          invalidos.push(`${nombre}: es obligatorio.`);
+        }
+        return;
+      }
+
+      if (valor.length < 12) {
+        campo.classList.add('required-error');
+        invalidos.push(`${nombre}: debe tener mínimo 12 dígitos.`);
+      }
+    });
+
+    if (invalidos.length) {
+      alert('Revisa los campos MAC:\n\n- ' + invalidos.join('\n- '));
+      return false;
+    }
+
+    return true;
+  }
+
 
   function guardarFormulario() {
     const datos = {};
@@ -558,6 +595,10 @@ ${materiales.join('\n')}`
       return;
     }
 
+    if (!validarMacs()) {
+      return;
+    }
+
     if (!validarTvYMechas()) {
       return;
     }
@@ -580,6 +621,10 @@ ${materiales.join('\n')}`
 
   async function copiarYAbrirWhatsApp() {
     if (!validarCamposObligatorios()) {
+      return;
+    }
+
+    if (!validarMacs()) {
       return;
     }
 
@@ -732,6 +777,12 @@ ${materiales.join('\n')}`
       e.target.classList.remove('required-error');
     }
 
+    if (e.target.id === 'mac_onu' || e.target.id === 'mac_onu_rec') {
+      if ((e.target.value || '').trim().length >= 12) {
+        e.target.classList.remove('required-error');
+      }
+    }
+
     if (e.target.id === 'tv' || e.target.id === 'mechas') {
     document.getElementById('tv')?.classList.remove('required-error');
     document.getElementById('mechas')?.classList.remove('required-error');
@@ -746,6 +797,12 @@ ${materiales.join('\n')}`
 
     if (e.target.matches('[data-required="true"]')) {
       e.target.classList.remove('required-error');
+    }
+
+    if (e.target.id === 'mac_onu' || e.target.id === 'mac_onu_rec') {
+      if ((e.target.value || '').trim().length >= 12) {
+        e.target.classList.remove('required-error');
+      }
     }
   });
 
