@@ -379,3 +379,14 @@ textarea:focus {
 .top-actions {
   margin-bottom: 20px;
 }
+
+.required-error {
+  border: 2px solid #dc2626 !important;
+  background: #fff5f5 !important;
+}
+
+.required-label::after {
+  content: " *";
+  color: #dc2626;
+  font-weight: 700;
+}

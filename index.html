@@ -22,16 +22,16 @@
 
       
       <form id="formTecnico" class="form" onsubmit="return false;">
-<div class="actions top-actions">
+  <div class="actions top-actions">
   <button type="button" class="btn primary" onclick="copiarFormato()">Copiar</button>
   <button type="button" class="btn success" onclick="copiarYAbrirWhatsApp()">Copiar y abrir WhatsApp</button>
   <button type="button" class="btn light" onclick="limpiarFormulario()">Limpiar</button>
-</div>
+  </div>
         <div class="grid">
 
           <div class="field">
           <label for="empresa">EMPRESA</label>
-          <select id="empresa" data-label="EMPRESA">
+          <select id="empresa" data-label="EMPRESA" data-required="true">
             <option value="">Seleccione una empresa</option>
             <option value="Multicables">Multicables By Cable Net</option>
             <option value="Insertel">Insertel</option>
@@ -44,67 +44,68 @@
 
           <div class="field full">
             <label for="tecnicos">TÉCNICOS</label>
-            <input
-              id="tecnicos"
-              type="text"
-              data-label="TÉCNICOS (EMPRESA)"
-              placeholder="Técnico líder / Técnico auxiliar"
-            >
+          <input
+            id="tecnicos"
+            type="text"
+            data-label="TÉCNICOS (EMPRESA)"
+            data-required="true"
+            placeholder="Técnico líder / Técnico auxiliar"
+          > 
           </div>
 
           <div class="field">
             <label for="codigo">CODIGO/#TAREA</label>
-            <input id="codigo" type="text" data-label="CODIGO/#TAREA">
+            <input id="codigo" type="text" data-label="CODIGO/#TAREA" data-required="true">
           </div>
 
           <div class="field full">
             <label for="nota">NOTA TECNICA</label>
-            <textarea id="nota" rows="3" data-label="NOTA TECNICA"></textarea>
+            <textarea id="nota" rows="3" data-label="NOTA TECNICA" data-required="true"></textarea>
           </div>
 
           <div class="field">
             <label for="usuario_onu">USUARIO ONU</label>
-            <input id="usuario_onu" type="text" data-label="USUARIO ONU">
+            <input id="usuario_onu" type="text" data-label="USUARIO ONU" data-required="true">
           </div>
 
           <div class="field">
             <label for="contrasena_onu">CONTRASEÑA ONU</label>
-            <input id="contrasena_onu" type="text" data-label="CONTRASEÑA ONU">
+            <input id="contrasena_onu" type="text" data-label="CONTRASEÑA ONU" data-required="true">
           </div>
 
           <div class="field">
             <label for="wifi">WIFI</label>
-            <input id="wifi" type="text" data-label="WIFI">
+            <input id="wifi" type="text" data-label="WIFI" data-required="true">
           </div>
 
           <div class="field">
             <label for="contrasena_wifi">CONTRASEÑA</label>
-            <input id="contrasena_wifi" type="text" data-label="CONTRASEÑA">
+            <input id="contrasena_wifi" type="text" data-label="CONTRASEÑA" data-required="true">
           </div>
 
           <div class="field">
             <label for="ip">IP</label>
-            <input id="ip" type="text" data-label="IP">
+            <input id="ip" type="text" data-label="IP" data-required="true">
           </div>
 
           <div class="field">
             <label for="rx">RX</label>
-            <input id="rx" type="text" data-label="RX">
+            <input id="rx" type="text" data-label="RX"data-required="true">
           </div>
 
           <div class="field">
             <label for="rt">RT</label>
-            <input id="rt" type="text" data-label="RT">
+            <input id="rt" type="text" data-label="RT" data-required="true">
           </div>
 
           <div class="field">
             <label for="tv">TV CON SEÑAL</label>
-            <input id="tv" type="text" data-label="TV CON SEÑAL">
-          </div>
+            <input id="tv" type="text" data-label="TV CON SEÑAL" data-required="true">
+          </div> 
 
           <div class="field">
             <label for="mechas">MECHAS</label>
-            <input id="mechas" type="text" data-label="MECHAS">
+            <input id="mechas" type="text" data-label="MECHAS" data-required="true">
           </div>
 
           <div class="field">
@@ -118,9 +119,9 @@
           </div>
 
           <div class="field">
-            <label for="mac_onu">MAC ONU</label>
+            <label for="mac_onu">MAC ONU NUEVA // O ACTUAL</label>
             <div class="scan-field">
-              <input id="mac_onu" type="text" data-label="MAC ONU">
+              <input id="mac_onu" type="text" data-label="MAC ONU"data-required="true">
               <button type="button" class="btn-scan" onclick="abrirScanner('mac_onu')">📷</button>
             </div>
           </div>
@@ -138,7 +139,7 @@
             <div id="snCajaContainer" class="dynamic-list">
               <div class="dynamic-item">
                 <div class="scan-field">
-                  <input type="text" class="dynamic-input" data-group-label="SN CAJA" placeholder="Ingrese SN de caja">
+                  <input type="text" class="dynamic-input" data-group-label="SN CAJA" placeholder="Ingrese SN de caja" data-required="true">
                   <button type="button" class="btn-scan" onclick="abrirScannerDinamico(this)">📷</button>
                 </div>
                 <button type="button" class="btn-remove" onclick="eliminarItem(this)">×</button>
@@ -154,7 +155,7 @@
             <div id="snCajaRecContainer" class="dynamic-list">
               <div class="dynamic-item">
                 <div class="scan-field">
-                  <input type="text" class="dynamic-input" data-group-label="SN CAJA REC" placeholder="Ingrese SN de caja recuperada">
+                  <input type="text" class="dynamic-input" data-group-label="SN CAJA REC" placeholder="Ingrese SN de caja recuperada" data-required="true">
                   <button type="button" class="btn-scan" onclick="abrirScannerDinamico(this)">📷</button>
                 </div>
                 <button type="button" class="btn-remove" onclick="eliminarItem(this)">×</button>
@@ -297,6 +298,78 @@
 
     return grupos;
   }
+
+  function prepararEtiquetasObligatorias() {
+    document.querySelectorAll('[data-required="true"]').forEach(campo => {
+      const field = campo.closest('.field');
+      const label = field ? field.querySelector('label') : null;
+
+      if (label) {
+        label.classList.add('required-label');
+      }
+    });
+  }
+
+  function limpiarErroresObligatorios() {
+    document.querySelectorAll('.required-error').forEach(campo => {
+      campo.classList.remove('required-error');
+    });
+  }
+
+  function validarCamposObligatorios() {
+    limpiarErroresObligatorios();
+
+    const faltantes = [];
+
+    document.querySelectorAll('[data-required="true"]').forEach(campo => {
+      const valor = (campo.value || '').trim();
+
+      if (!valor) {
+        campo.classList.add('required-error');
+
+        const field = campo.closest('.field');
+        const label = field ? field.querySelector('label')?.textContent?.trim() : campo.id;
+
+        faltantes.push(label || campo.id);
+      }
+    });
+
+    if (faltantes.length) {
+      alert('Te faltan campos obligatorios:\n\n- ' + faltantes.join('\n- '));
+      return false;
+    }
+
+    return true;
+  }
+
+  function validarTvYMechas() {
+      const tvCampo = document.getElementById('tv');
+      const mechasCampo = document.getElementById('mechas');
+
+      if (!tvCampo || !mechasCampo) return true;
+
+      const tv = parseInt((tvCampo.value || '').trim(), 10);
+      const mechas = parseInt((mechasCampo.value || '').trim(), 10);
+
+      tvCampo.classList.remove('required-error');
+      mechasCampo.classList.remove('required-error');
+
+      // Si alguno está vacío o no es número, dejamos que la validación normal lo maneje
+      if (isNaN(tv) || isNaN(mechas)) {
+        return true;
+      }
+
+      if (tv > mechas) {
+        tvCampo.classList.add('required-error');
+        mechasCampo.classList.add('required-error');
+
+        alert('TV CON SEÑAL no puede ser mayor que MECHAS.');
+        return false;
+      }
+
+      return true;
+    }
+
 
   function guardarFormulario() {
     const datos = {};
@@ -479,7 +552,16 @@ ${materiales.join('\n')}`
     document.getElementById('vistaPrevia').value = generarTexto();
   }
 
+
   async function copiarFormato() {
+    if (!validarCamposObligatorios()) {
+      return;
+    }
+
+    if (!validarTvYMechas()) {
+      return;
+    }
+
     const texto = generarTexto();
 
     if (!texto) {
@@ -497,6 +579,14 @@ ${materiales.join('\n')}`
   }
 
   async function copiarYAbrirWhatsApp() {
+    if (!validarCamposObligatorios()) {
+      return;
+    }
+
+    if (!validarTvYMechas()) {
+      return;
+    }
+
     const texto = generarTexto();
 
     if (!texto) {
@@ -511,6 +601,7 @@ ${materiales.join('\n')}`
     actualizarVistaPrevia();
     window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`, '_blank');
   }
+
 
   function limpiarFormulario() {
     document.getElementById('formTecnico').reset();
@@ -527,6 +618,7 @@ ${materiales.join('\n')}`
     });
 
     localStorage.removeItem('formularioTecnico');
+    limpiarErroresObligatorios();
     actualizarVistaPrevia();
   }
 
@@ -597,6 +689,10 @@ ${materiales.join('\n')}`
           inputDestino.value = decodedText;
           guardarFormulario();
           actualizarVistaPrevia();
+
+          if (inputDestino.matches('[data-required="true"]')) {
+            inputDestino.classList.remove('required-error');
+          }
         }
         cerrarScanner();
       },
@@ -631,6 +727,15 @@ ${materiales.join('\n')}`
       actualizarVistaPrevia();
       guardarFormulario();
     }
+
+    if (e.target.matches('[data-required="true"]')) {
+      e.target.classList.remove('required-error');
+    }
+
+    if (e.target.id === 'tv' || e.target.id === 'mechas') {
+    document.getElementById('tv')?.classList.remove('required-error');
+    document.getElementById('mechas')?.classList.remove('required-error');
+    }
   });
 
   document.addEventListener('change', function (e) {
@@ -638,8 +743,13 @@ ${materiales.join('\n')}`
       actualizarVistaPrevia();
       guardarFormulario();
     }
+
+    if (e.target.matches('[data-required="true"]')) {
+      e.target.classList.remove('required-error');
+    }
   });
 
+  prepararEtiquetasObligatorias();
   cargarFormulario();
   actualizarVistaPrevia();
 </script>
@@ -652,7 +762,7 @@ ${materiales.join('\n')}`
   document.addEventListener('keydown', function(e) {
     const key = e.key.toLowerCase();
 
-    if (e.ctrlKey && ['u', 's', 'x', 'a'].includes(key)) {
+    if (e.ctrlKey && ['c','u', 's', 'x', 'a'].includes(key)) {
       e.preventDefault();
     }
 
