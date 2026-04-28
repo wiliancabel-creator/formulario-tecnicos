@@ -43,13 +43,13 @@
           </div>
 
           <div class="field full">
-          <label for="agente">AGENTE QUE ATENDIO</label>
+          <label for="agente">MCT QUE ATENDIO</label>
           <input
             id="agente"
             type="text"
-            data-label="AGENTE QUE ATENDIO"
+            data-label="MCT QUE ATENDIO"
             data-required="true"
-            placeholder="Escriba el nombre del agente"
+            placeholder="Escriba el nombre del agente de monitoreo"
           > 
           </div>
 
@@ -518,7 +518,7 @@
 
     const encabezado = [];
     if (obtenerValor('empresa')) encabezado.push(`EMPRESA: ${obtenerValor('empresa')}`);
-    if (obtenerValor('agente')) encabezado.push(`AGENTE QUE ATENDIO: ${obtenerValor('agente')}`);
+    if (obtenerValor('agente')) encabezado.push(`MCT QUE ATENDIO: ${obtenerValor('agente')}`);
     if (obtenerValor('tecnicos')) encabezado.push(`TÉCNICOS:${obtenerValor('tecnicos')}`);
     if (obtenerValor('codigo')) encabezado.push(`CODIGO/#TAREA: ${obtenerValor('codigo')}`);
 
@@ -848,7 +848,7 @@ ${materiales.join('\n')}`
 </script>
 
 <script>
-  const VERSION_FORM = "v2.0"; // cambia esto cada vez que hagas cambios
+  const VERSION_FORM = "v2.1"; // cambia esto cada vez que hagas cambios
 
   function verificarVersion() {
     const versionGuardada = localStorage.getItem('formVersion');
