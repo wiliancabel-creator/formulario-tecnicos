@@ -847,5 +847,27 @@ ${materiales.join('\n')}`
   });
 </script>
 
+<script>
+  const VERSION_FORM = "v2.0"; // cambia esto cada vez que hagas cambios
+
+  function verificarVersion() {
+    const versionGuardada = localStorage.getItem('formVersion');
+
+    if (!versionGuardada) {
+      localStorage.setItem('formVersion', VERSION_FORM);
+      return;
+    }
+
+    if (versionGuardada !== VERSION_FORM) {
+      localStorage.setItem('formVersion', VERSION_FORM);
+      location.reload(true);
+    }
+  }
+
+  verificarVersion();
+</script>
+
+
+
 </body>
 </html>
