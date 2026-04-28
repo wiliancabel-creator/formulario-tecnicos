@@ -43,6 +43,19 @@
           </div>
 
           <div class="field full">
+          <label for="agente">AGENTE QUE ATENDIO</label>
+          <input
+            id="agente"
+            type="text"
+            data-label="AGENTE QUE ATENDIO"
+            data-required="true"
+            placeholder="Escriba el nombre del agente"
+          > 
+          </div>
+
+
+
+          <div class="field full">
             <label for="tecnicos">TÉCNICOS</label>
           <input
             id="tecnicos"
@@ -505,6 +518,7 @@
 
     const encabezado = [];
     if (obtenerValor('empresa')) encabezado.push(`EMPRESA: ${obtenerValor('empresa')}`);
+    if (obtenerValor('agente')) encabezado.push(`AGENTE QUE ATENDIO: ${obtenerValor('agente')}`);
     if (obtenerValor('tecnicos')) encabezado.push(`TÉCNICOS:${obtenerValor('tecnicos')}`);
     if (obtenerValor('codigo')) encabezado.push(`CODIGO/#TAREA: ${obtenerValor('codigo')}`);
 
