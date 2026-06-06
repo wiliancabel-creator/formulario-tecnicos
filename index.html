@@ -179,6 +179,16 @@
             </button>
           </div>
 
+
+          <div class="field">
+            <label for="serie_mini_upc">SERIE DE LA MINI UPC</label>
+            <div class="scan-field">
+              <input id="serie_mini_upc" type="text" data-label="SERIE DE LA MINI UPC">
+              <button type="button" class="btn-scan" onclick="abrirScanner('serie_mini_upc')">📷</button>
+            </div>
+          </div>
+
+
           <div class="field">
             <label for="mac_router">MAC ROUTER</label>
             <div class="scan-field">
@@ -558,7 +568,7 @@ ${conexion.join('\n')}`
     if (obtenerValor('mac_onu_rec')) identificacion.push(`MAC ONU REC: ${obtenerValor('mac_onu_rec')}`);
     if (obtenerValor('mac_router')) identificacion.push(`MAC ROUTER: ${obtenerValor('mac_router')}`);
     if (obtenerValor('mac_router_rec')) identificacion.push(`MAC ROUTER REC: ${obtenerValor('mac_router_rec')}`);
-
+    if (obtenerValor('serie_mini_upc')) identificacion.push(`SERIE DE LA MINI UPC: ${obtenerValor('serie_mini_upc')}`);
     if (gruposDinamicos['SN CAJA']?.length) {
       identificacion.push(`SN CAJA: ${gruposDinamicos['SN CAJA'].join(', ')}`);
     }
@@ -848,7 +858,7 @@ ${materiales.join('\n')}`
 </script>
 
 <script>
-  const VERSION_FORM = "v2.1"; // cambia esto cada vez que hagas cambios
+  const VERSION_FORM = "v2.2"; // cambia esto cada vez que hagas cambios
 
   function verificarVersion() {
     const versionGuardada = localStorage.getItem('formVersion');
